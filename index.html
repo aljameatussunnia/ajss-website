@@ -12,6 +12,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+<!-- EmailJS SDK — sends admission data to sharewithajss@gmail.com -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <!-- Firebase SDK -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -27,12 +30,12 @@
      Go to: Firebase Console → Project Settings → Your Apps → Config
   ============================================================ */
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCqNIqMNwMOMcKGkZB8jxvq6-Jos3G6Dp0",
+    authDomain: "admissionportal-ed962.firebaseapp.com",
+    projectId: "admissionportal-ed962",
+    storageBucket: "admissionportal-ed962.firebasestorage.app",
+    messagingSenderId: "115780248850",
+    appId: "1:115780248850:web:d8ca24d87603038822bfcb"
   };
   /* ============================================================ */
 
@@ -128,6 +131,58 @@ ul { list-style: none; }
 }
 
 /* ======================================================
+   ANNOUNCEMENT BAR
+====================================================== */
+#announcement-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1002;
+  background: linear-gradient(135deg, #1a3a27 0%, #0c1f15 50%, #1a3a27 100%);
+  border-bottom: 1px solid rgba(201,168,76,0.45);
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#announcement-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.08) 50%, transparent 100%);
+  animation: announceSweep 2.5s ease-in-out infinite;
+}
+@keyframes announceSweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.announcement-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--gold2);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+}
+.announce-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  background: var(--gold2);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: announcePulse 1.4s ease-in-out infinite;
+}
+@keyframes announcePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(0.7); }
+}
+
+/* ======================================================
    SCROLLBAR
 ====================================================== */
 ::-webkit-scrollbar { width: 6px; }
@@ -139,7 +194,7 @@ ul { list-style: none; }
 ====================================================== */
 #navbar {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 42px; left: 0; right: 0;
   z-index: 1000;
   background: rgba(7,21,16,0.92);
   backdrop-filter: blur(18px) saturate(1.4);
@@ -239,7 +294,7 @@ nav a:hover { color: var(--gold2); background: rgba(201,168,76,0.08); }
 .mobile-menu {
   display: none;
   position: fixed;
-  top: 70px; left: 0; right: 0;
+  top: 112px; left: 0; right: 0;
   background: rgba(7,21,16,0.98);
   backdrop-filter: blur(18px);
   padding: 20px;
@@ -413,7 +468,7 @@ section { position: relative; overflow: hidden; }
   position: relative; z-index: 3;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 120px 24px 80px;
+  padding: 170px 24px 80px;
   text-align: center;
 }
 .hero-badge {
@@ -1469,6 +1524,17 @@ section { position: relative; overflow: hidden; }
 <body>
 
 <!-- ======================================================
+     ANNOUNCEMENT BAR
+====================================================== -->
+<div id="announcement-bar">
+  <div class="announcement-text">
+    <span class="announce-dot"></span>
+    M.M Final Examination 2026 — Result Coming Soon
+    <span class="announce-dot"></span>
+  </div>
+</div>
+
+<!-- ======================================================
      NAVBAR
 ====================================================== -->
 <header id="navbar">
@@ -1965,31 +2031,23 @@ section { position: relative; overflow: hidden; }
       </div>
       <div class="contact-form reveal">
         <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold2);margin-bottom:24px;">Send an Inquiry</h3>
-        <form id="contactForm" onsubmit="submitAdmission(event)">
-    <div class="form-group">
-        <label class="form-label">Your Name *</label>
-        <input class="form-input" type="text" id="name" name="name" placeholder="Full Name" required>
-    </div>
-    <div class="form-group">
-        <label class="form-label">Father's Name *</label>
-        <input class="form-input" type="text" id="fatherName" placeholder="Father's Name" required>
-    </div>
-    <div class="form-group">
-        <label class="form-label">Class *</label>
-        <input class="form-input" type="text" id="className" placeholder="Class" required>
-    </div>
-    <div class="form-group">
-        <label class="form-label">Mobile Number *</label>
-        <input class="form-input" type="tel" id="phone" name="mobile" placeholder="+91 XXXXX XXXXX" required>
-    </div>
-    <div class="form-group">
-        <label class="form-label">Address *</label>
-        <input class="form-input" type="text" id="address" placeholder="Full Address" required>
-    </div>
-    <button type="submit" class="btn-primary" style="width:100%;justify-content:center;" id="contactBtn">
-        Submit Admission
-    </button>
-</form>
+        <form id="contactForm" onsubmit="submitContact(event)">
+          <div class="form-group">
+            <label class="form-label">Your Name *</label>
+            <input class="form-input" type="text" name="name" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mobile Number *</label>
+            <input class="form-input" type="tel" name="mobile" placeholder="+91 XXXXX XXXXX" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Message *</label>
+            <textarea class="form-textarea" name="message" placeholder="Write your inquiry here…" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;" id="contactBtn">
+            Send Message
+          </button>
+        </form>
       </div>
     </div>
   </div>
@@ -2049,37 +2107,46 @@ section { position: relative; overflow: hidden; }
     <div id="admissionForm">
       <div class="modal-title">Apply for Admission</div>
       <div class="modal-sub">AL JAMEATUS SARIMEATUS SUNNIA — Please fill all fields accurately.</div>
-       <div class="modal-box" style="max-width: 800px;">
-    <button class="modal-close" onclick="closeAdmission()">✕</button>
-    <div id="admissionForm">
-        <div class="modal-title">Apply for Admission</div>
-        <form id="admissionFormEl" onsubmit="submitAdmission(event)">
-    <h4 style="color:#d4af37; margin:10px 0;">1. Admission Information</h4>
-    <div class="form-row"><div class="form-group"><label>Session</label><input class="form-input" type="text" name="session"></div><div class="form-group"><label>Course/Class</label><input class="form-input" type="text" name="className"></div></div>
-
-    <h4 style="color:#d4af37; margin:10px 0;">2. Student Details</h4>
-    <div class="form-group"><label>Full Name</label><input class="form-input" type="text" name="studentName"></div>
-    <div class="form-row"><div class="form-group"><label>DOB</label><input class="form-input" type="date" name="dob"></div><div class="form-group"><label>Aadhaar No.</label><input class="form-input" type="text" name="aadharNo"></div></div>
-    <div class="form-row"><div class="form-group"><label>Gender</label><select class="form-select form-input" name="gender"><option>Male</option><option>Female</option></select></div><div class="form-group"><label>Mobile</label><input class="form-input" type="tel" name="mobile"></div></div>
-
-    <h4 style="color:#d4af37; margin:10px 0;">3. Parent/Guardian Details</h4>
-    <div class="form-row"><div class="form-group"><label>Father Name</label><input class="form-input" type="text" name="fatherName"></div><div class="form-group"><label>Guardian Name</label><input class="form-input" type="text" name="guardianName"></div></div>
-    <div class="form-row"><div class="form-group"><label>Parent Mobile</label><input class="form-input" type="tel" name="parentMobile"></div><div class="form-group"><label>Annual Income</label><input class="form-input" type="number" name="income"></div></div>
-
-    <h4 style="color:#d4af37; margin:10px 0;">4. Address</h4>
-    <div class="form-group"><label>Full Address</label><textarea class="form-textarea" name="address"></textarea></div>
-
-    <div class="form-row"><div class="form-group"><label>Prev. School</label><input class="form-input" type="text" name="prevSchool"></div><div class="form-group"><label>Hostel Req (Yes/No)</label><input class="form-input" type="text" name="hostelReq"></div></div>
-
-    <div style="margin:15px 0;"><input type="checkbox" name="terms" required> I agree to the terms.</div>
-    <button type="submit" class="btn-primary" style="width:100%;" id="admitBtn">Submit Application</button>
-</form>
+      <form id="admissionFormEl" onsubmit="submitAdmission(event)">
+        <h4 style="color:#d4af37;margin:10px 0;">1. Admission Information</h4>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Session</label><input class="form-input" type="text" name="session" placeholder="e.g. 2025-26"></div>
+          <div class="form-group"><label class="form-label">Course / Class *</label><input class="form-input" type="text" name="courseClass" placeholder="e.g. 3rd Year" required></div>
+        </div>
+        <h4 style="color:#d4af37;margin:10px 0;">2. Student Details</h4>
+        <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" type="text" name="studentName" placeholder="Student full name" required></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Date of Birth</label><input class="form-input" type="date" name="dob"></div>
+          <div class="form-group"><label class="form-label">Aadhaar No.</label><input class="form-input" type="text" name="aadharNo" placeholder="12-digit Aadhaar"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Gender</label><select class="form-select form-input" name="gender"><option value="Male">Male</option><option value="Female">Female</option></select></div>
+          <div class="form-group"><label class="form-label">Student Mobile *</label><input class="form-input" type="tel" name="mobile" placeholder="+91 XXXXX XXXXX" required></div>
+        </div>
+        <h4 style="color:#d4af37;margin:10px 0;">3. Parent / Guardian Details</h4>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Father's Name *</label><input class="form-input" type="text" name="fatherName" placeholder="Father's full name" required></div>
+          <div class="form-group"><label class="form-label">Guardian Name</label><input class="form-input" type="text" name="guardianName" placeholder="If different from father"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Parent Mobile *</label><input class="form-input" type="tel" name="parentMobile" placeholder="+91 XXXXX XXXXX" required></div>
+          <div class="form-group"><label class="form-label">Annual Income (₹)</label><input class="form-input" type="number" name="income" placeholder="Family annual income"></div>
+        </div>
+        <h4 style="color:#d4af37;margin:10px 0;">4. Address</h4>
+        <div class="form-group"><label class="form-label">Full Address *</label><textarea class="form-textarea" name="address" placeholder="Village / Town, District, State" required></textarea></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Previous School</label><input class="form-input" type="text" name="prevSchool" placeholder="Previous institute name"></div>
+          <div class="form-group"><label class="form-label">Hostel Required?</label><select class="form-select form-input" name="hostelReq"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+        </div>
+        <div style="margin:15px 0;font-size:0.88rem;color:var(--tm);"><label><input type="checkbox" name="terms" required style="margin-right:8px;">I confirm all information provided is accurate and I agree to the institute's terms.</label></div>
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;" id="admitBtn">Submit Application</button>
+      </form>
     </div>
     <div class="success-state" id="admissionSuccess">
       <div class="success-icon">✅</div>
-      <div class="success-title">Application Submitted Successfully</div>
+      <div class="success-title">Application Submitted!</div>
       <p class="success-text" style="margin-bottom:20px;">
-        Your admission application has been received. Our team will review it and contact you via WhatsApp or phone.
+        Your admission application has been received. Our team will review it and contact you via WhatsApp or phone within 2–3 working days.
       </p>
       <a href="https://wa.me/918402849739" target="_blank" class="btn-whatsapp" style="justify-content:center;">
         Message on WhatsApp
@@ -2146,6 +2213,49 @@ section { position: relative; overflow: hidden; }
      SCRIPTS
 ====================================================== -->
 <script>
+// ====================================================
+// EMAILJS SETUP — sharewithajss@gmail.com
+// Step 1: Go to https://www.emailjs.com and create a FREE account
+// Step 2: Add Service → Select Gmail → Connect sharewithajss@gmail.com
+// Step 3: Email Templates → Create Template → Copy the template below
+// Step 4: Account → API Keys → Copy your Public Key
+// Then replace the 3 values below:
+// ====================================================
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // Account → API Keys
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // Email Services → Service ID
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // Email Templates → Template ID
+// ====================================================
+// EMAIL TEMPLATE to create in EmailJS dashboard:
+// Subject:  New Admission Application — {{student_name}} ({{class_applied}})
+// Body:
+//   New admission application received at AJSS.
+//
+//   Student Name:    {{student_name}}
+//   Class Applied:   {{class_applied}}
+//   Session:         {{session}}
+//   Date of Birth:   {{dob}}
+//   Gender:          {{gender}}
+//   Aadhaar No:      {{aadhar_no}}
+//   Mobile:          {{mobile}}
+//
+//   Father's Name:   {{father_name}}
+//   Guardian Name:   {{guardian_name}}
+//   Parent Mobile:   {{parent_mobile}}
+//   Annual Income:   {{income}}
+//
+//   Address:         {{address}}
+//   Previous School: {{prev_school}}
+//   Hostel Required: {{hostel_req}}
+//
+//   Submitted At:    {{submitted_at}}
+// ====================================================
+
+try {
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+} catch(e) {
+  console.warn('EmailJS init skipped:', e.message);
+}
+
 // ---- Navbar scroll effect ----
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -2220,15 +2330,22 @@ async function submitAdmission(e) {
   const btn = document.getElementById('admitBtn');
   btn.textContent = 'Submitting…'; btn.disabled = true;
   const form = e.target;
+  const fd = new FormData(form);
   const data = {
-    studentName:  form.studentName.value.trim(),
-    guardianName: form.guardianName.value.trim(),
-    mobile:       form.mobile.value.trim(),
-    whatsapp:     form.whatsapp.value.trim(),
-    dob:          form.dob.value,
-    classApplied: form.class.value,
-    address:      form.address.value.trim(),
-    message:      form.message.value.trim(),
+    session:      (fd.get('session')     || '').trim(),
+    classApplied: (fd.get('courseClass') || '').trim(),
+    studentName:  (fd.get('studentName') || '').trim(),
+    dob:          (fd.get('dob')         || ''),
+    aadharNo:     (fd.get('aadharNo')    || '').trim(),
+    gender:       (fd.get('gender')      || ''),
+    mobile:       (fd.get('mobile')      || '').trim(),
+    fatherName:   (fd.get('fatherName')  || '').trim(),
+    guardianName: (fd.get('guardianName')|| '').trim(),
+    parentMobile: (fd.get('parentMobile')|| '').trim(),
+    income:       (fd.get('income')      || '').trim(),
+    address:      (fd.get('address')     || '').trim(),
+    prevSchool:   (fd.get('prevSchool')  || '').trim(),
+    hostelReq:    (fd.get('hostelReq')   || ''),
     status:       'pending',
     submittedAt:  new Date().toISOString()
   };
@@ -2236,20 +2353,8 @@ async function submitAdmission(e) {
   const fb = window._firebase;
   if (fb && fb.db) {
     try {
-      // Upload files if any
-      const photoFile = document.getElementById('photoFile').files[0];
-      const docFile   = document.getElementById('docFile').files[0];
-      if (photoFile && fb.storage) {
-        const r = fb.ref(fb.storage, `admissions/${Date.now()}_photo_${photoFile.name}`);
-        const snap = await fb.uploadBytes(r, photoFile);
-        data.photoURL = await fb.getDownloadURL(snap.ref);
-      }
-      if (docFile && fb.storage) {
-        const r = fb.ref(fb.storage, `admissions/${Date.now()}_doc_${docFile.name}`);
-        const snap = await fb.uploadBytes(r, docFile);
-        data.docURL = await fb.getDownloadURL(snap.ref);
-      }
       await fb.addDoc(fb.collection(fb.db, 'applications'), { ...data, submittedAt: fb.serverTimestamp() });
+      await sendAdmissionEmail(data);
       showSuccess();
     } catch(err) {
       console.error(err);
@@ -2257,10 +2362,35 @@ async function submitAdmission(e) {
       btn.textContent = 'Submit Application'; btn.disabled = false;
     }
   } else {
-    // Firebase not configured — show success anyway, admin will use WhatsApp follow-up
+    try { await sendAdmissionEmail(data); } catch(e) { console.warn('Email skipped:', e.message); }
     showSuccess();
   }
 }
+
+// ---- Send Admission Email via EmailJS ----
+async function sendAdmissionEmail(data) {
+  if (!EMAILJS_PUBLIC_KEY || EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') return;
+  const templateParams = {
+    to_email:     'sharewithajss@gmail.com',
+    student_name: data.studentName  || '—',
+    class_applied:data.classApplied || '—',
+    session:      data.session      || '—',
+    dob:          data.dob          || '—',
+    gender:       data.gender       || '—',
+    aadhar_no:    data.aadharNo     || '—',
+    mobile:       data.mobile       || '—',
+    father_name:  data.fatherName   || '—',
+    guardian_name:data.guardianName || '—',
+    parent_mobile:data.parentMobile || '—',
+    income:       data.income       || '—',
+    address:      data.address      || '—',
+    prev_school:  data.prevSchool   || '—',
+    hostel_req:   data.hostelReq    || '—',
+    submitted_at: new Date(data.submittedAt).toLocaleString('en-IN')
+  };
+  await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+}
+
 function showSuccess() {
   document.getElementById('admissionForm').style.display = 'none';
   document.getElementById('admissionSuccess').style.display = 'block';
@@ -2469,122 +2599,6 @@ checkAdminHash();
 document.addEventListener('keydown', (e) => {
   if (e.ctrlKey && e.shiftKey && e.key === 'A') openAdmin();
 });
-</script>
-<script type="module">
-
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
-
-  // TODO: Add SDKs for Firebase products that you want to use
-
-
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-
-
-  // Your web app's Firebase configuration
-
-
-  const firebaseConfig = {
-
-
-    apiKey: "AIzaSyCqNIqMNwMOMcKGkZB8jxvq6-Jos3G6Dp0",
-
-
-    authDomain: "admissionportal-ed962.firebaseapp.com",
-
-
-    projectId: "admissionportal-ed962",
-
-
-    storageBucket: "admissionportal-ed962.firebasestorage.app",
-
-
-    messagingSenderId: "115780248850",
-
-
-    appId: "1:115780248850:web:d8ca24d87603038822bfcb"
-
-
-  };
-
-
-
-  // Initialize Firebase
-
-
-  const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-<form id="contactForm" onsubmit="submitAdmission(event)">
-    <div class="form-group">
-        <label class="form-label">Your Name *</label>
-        <input class="form-input" type="text" id="name" placeholder="Full Name" required>
-    </div>
-    <div class="form-group">
-        <label class="form-label">Father's Name *</label>
-        <input class="form-input" type="text" id="fatherName" placeholder="Father's Name" required>
-    </div>
-    <div class="form-group">
-        <label class="form-label">Class *</label>
-        <input class="form-input" type="text" id="className" placeholder="Class" required>
-    </div>
-    <div class="form-group">
-        <label class="form-label">Mobile Number *</label>
-        <input class="form-input" type="tel" id="phone" placeholder="+91 XXXXX XXXXX" required>
-    </div>
-    <div class="form-group">
-        <label class="form-label">Address *</label>
-        <input class="form-input" type="text" id="address" placeholder="Full Address" required>
-    </div>
-    <button type="submit" class="btn-primary" style="width:100%;justify-content:center;" id="contactBtn">
-        Submit Admission
-    </button>
-</form>
- <script>
-window.submitAdmission = async function(event) {
-    event.preventDefault();
-    const btn = document.getElementById('admitBtn');
-    btn.textContent = 'Submitting…'; 
-    btn.disabled = true;
-
-    const form = event.target;
-    const data = {
-        session: form.session.value,
-        className: form.className.value,
-        studentName: form.studentName.value,
-        dob: form.dob.value,
-        aadharNo: form.aadharNo.value,
-        gender: form.gender.value,
-        mobile: form.mobile.value,
-        fatherName: form.fatherName.value,
-        guardianName: form.guardianName.value,
-        parentMobile: form.parentMobile.value,
-        income: form.income.value,
-        address: form.address.value,
-        prevSchool: form.prevSchool.value,
-        hostelReq: form.hostelReq.value,
-        status: 'pending',
-        submittedAt: new Date().toISOString()
-    };
-
-    try {
-        const fb = window._firebase;
-        if (fb && fb.db) {
-            await fb.addDoc(fb.collection(fb.db, 'applications'), data);
-            alert("Application submitted successfully!");
-            form.reset();
-        } else {
-            alert("Database connection error.");
-        }
-    } catch (e) {
-        alert("Error: " + e.message);
-    }
-    btn.textContent = 'Submit Application';
-    btn.disabled = false;
-}
 </script>
 </body>
 </html>
