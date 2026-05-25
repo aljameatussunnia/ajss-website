@@ -1969,12 +1969,31 @@ section { position: relative; overflow: hidden; }
         <div class="orphan-badge">Orphan Students Only</div>
       </div>
     </div>
+    <div class="upi-card reveal" style="margin-top:40px;max-width:520px;margin-left:auto;margin-right:auto;">
+      <div class="upi-logo-row">
+        <span class="upi-icon">🤲</span>
+        <span class="upi-brand">SUPPORT ORPHAN STUDENTS</span>
+      </div>
+      <p class="upi-label">Scan QR or use UPI ID to donate</p>
+      <img src="qr-code.jpg" alt="UPI QR Code" style="width:200px;height:200px;object-fit:contain;background:#fff;padding:8px;border-radius:10px;display:block;margin:16px auto;border:1px solid rgba(201,168,76,0.25);">
+      <div class="upi-id-display">
+        <div class="upi-id-value">11500899@cbin</div>
+        <div class="upi-id-note">UPI ID — CBIN Bank</div>
+      </div>
+      <div class="upi-actions">
+        <button class="btn-copy" onclick="navigator.clipboard.writeText('11500899@cbin').then(()=>{this.textContent='✓ Copied!';setTimeout(()=>{this.innerHTML='<svg width=\'14\' height=\'14\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\'><rect x=\'9\' y=\'9\' width=\'13\' height=\'13\' rx=\'2\'/><path d=\'M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\'/></svg> Copy UPI ID'},2000)})">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy UPI ID
+        </button>
+        <a href="upi://pay?pa=11500899@cbin&pn=AL+JAMEATUS+SARIMEATUS+SUNNIA&cu=INR" class="btn-pay">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          Open UPI App
+        </a>
+      </div>
+      <p class="upi-note">Your donation directly supports orphan students — their education, food, shelter and care.</p>
+    </div>
   </div>
 </section>
-
-<!-- ======================================================
-     WHY CHOOSE US
-====================================================== -->
 <section id="why" class="section-pad pattern-bg">
   <div class="container">
     <div class="reveal">
