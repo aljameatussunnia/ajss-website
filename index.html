@@ -183,6 +183,159 @@ ul { list-style: none; }
 }
 
 /* ======================================================
+   DONATE BUTTON (HERO) + DONATE POPUP
+====================================================== */
+.btn-donate-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 2px solid #e5534b;
+  color: #f28b85;
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 13px 26px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.22s, color 0.22s, transform 0.18s;
+}
+.btn-donate-hero svg { stroke: #f28b85; transition: stroke 0.22s; }
+.btn-donate-hero:hover {
+  background: #e5534b;
+  color: #fff;
+  transform: translateY(-2px);
+}
+.btn-donate-hero:hover svg { stroke: #fff; }
+
+/* Donate Popup Overlay */
+#donatePopup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.72);
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s;
+}
+#donatePopup.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.donate-popup-box {
+  background: linear-gradient(160deg, #0e2318 0%, #0a1a10 100%);
+  border: 1px solid rgba(201,168,76,0.35);
+  border-radius: 16px;
+  padding: 38px 32px 32px;
+  max-width: 400px;
+  width: 92%;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+  transform: translateY(24px);
+  transition: transform 0.28s;
+}
+#donatePopup.active .donate-popup-box { transform: translateY(0); }
+.donate-popup-close {
+  position: absolute;
+  top: 14px; right: 16px;
+  background: none;
+  border: none;
+  color: var(--tm);
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.donate-popup-close:hover { opacity: 1; }
+.donate-popup-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--gold2);
+  text-align: center;
+  margin-bottom: 4px;
+}
+.donate-popup-sub {
+  font-size: 0.82rem;
+  color: var(--tm);
+  opacity: 0.65;
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 0.04em;
+}
+.donate-upi-box {
+  background: rgba(201,168,76,0.07);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+.donate-upi-id {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--gold2);
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+.donate-upi-bank {
+  font-size: 0.8rem;
+  color: var(--tm);
+  opacity: 0.6;
+  margin-bottom: 16px;
+}
+.donate-popup-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.donate-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.4);
+  color: var(--gold2);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+  letter-spacing: 0.04em;
+}
+.donate-copy-btn:hover { background: rgba(201,168,76,0.2); }
+.donate-open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(135deg, var(--gold1), var(--gold2));
+  color: #0a1a10;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+}
+.donate-open-btn:hover { opacity: 0.85; }
+.donate-popup-note {
+  font-size: 0.78rem;
+  color: var(--tm);
+  opacity: 0.5;
+  text-align: center;
+  margin-top: 14px;
+  line-height: 1.5;
+}
+
+/* ======================================================
    SCROLLBAR
 ====================================================== */
 ::-webkit-scrollbar { width: 6px; }
@@ -1626,6 +1779,10 @@ section { position: relative; overflow: hidden; }
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.549 4.116 1.516 5.856L0 24l6.335-1.493A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.924 0-3.73-.479-5.308-1.326l-.377-.217-3.915.923.994-3.808-.24-.389A9.962 9.962 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
         Contact on WhatsApp
       </a>
+      <button class="btn-donate-hero" onclick="openDonatePopup()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Donate Now
+      </button>
     </div>
   </div>
   <div class="hero-scroll">
@@ -2101,6 +2258,35 @@ section { position: relative; overflow: hidden; }
 <!-- ======================================================
      ADMISSION MODAL
 ====================================================== -->
+<!-- ======================================================
+     DONATE POPUP
+====================================================== -->
+<div id="donatePopup">
+  <div class="donate-popup-box">
+    <button class="donate-popup-close" onclick="closeDonatePopup()">✕</button>
+    <div class="donate-popup-title">Donate Now</div>
+    <div class="donate-popup-sub">Support AL JAMEATUS SARIMEATUS SUNNIA</div>
+    <div class="donate-upi-box">
+      <div class="donate-upi-id">11500899@cbin</div>
+      <div class="donate-upi-bank">UPI ID — CBIN Bank</div>
+      <div class="donate-popup-actions">
+        <button class="donate-copy-btn" onclick="copyDonateUPI(this)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy UPI ID
+        </button>
+        <a href="upi://pay?pa=11500899@cbin&pn=AL+JAMEATUS+SARIMEATUS+SUNNIA&cu=INR" class="donate-open-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          Open UPI App
+        </a>
+      </div>
+    </div>
+    <p class="donate-popup-note">
+      After donating, please send a confirmation on WhatsApp.<br>
+      Your support makes a real difference for our students.
+    </p>
+  </div>
+</div>
+
 <div class="modal-overlay" id="admissionModal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeAdmission()">✕</button>
@@ -2305,6 +2491,26 @@ document.querySelector('a[href="#admission-trigger"]') &&
 function updateFileLabel(inputId, labelId) {
   const file = document.getElementById(inputId).files[0];
   if (file) document.getElementById(labelId).textContent = file.name.length > 22 ? file.name.substr(0,22)+'…' : file.name;
+}
+
+// ---- Donate Popup ----
+function openDonatePopup() {
+  document.getElementById('donatePopup').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeDonatePopup() {
+  document.getElementById('donatePopup').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('donatePopup').addEventListener('click', function(e) {
+  if (e.target === this) closeDonatePopup();
+});
+function copyDonateUPI(btn) {
+  navigator.clipboard.writeText('11500899@cbin').then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+  });
 }
 
 // ---- Copy UPI ----
