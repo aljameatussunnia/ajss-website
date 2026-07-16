@@ -1680,11 +1680,11 @@ section { position: relative; overflow: hidden; }
      ANNOUNCEMENT BAR
 ====================================================== -->
 <div id="announcement-bar">
-  <div class="announcement-text">
+  <a href="#result" class="announcement-text" style="cursor:pointer;">
     <span class="announce-dot"></span>
-    M.M Final Examination 2026 — Result Coming Soon
+    M.M Final Examination 2026 — Result Published! Click to check
     <span class="announce-dot"></span>
-  </div>
+  </a>
 </div>
 
 <!-- ======================================================
@@ -1707,6 +1707,7 @@ section { position: relative; overflow: hidden; }
       <a href="#about">About</a>
       <a href="#classes">Classes</a>
       <a href="#orphan">Orphan Support</a>
+      <a href="#result">Result</a>
       <a href="#admission-trigger">Apply</a>
       <a href="#support">Support Us</a>
       <a href="#location">Location</a>
@@ -1726,6 +1727,7 @@ section { position: relative; overflow: hidden; }
   <a href="#about" onclick="closeMobileMenu()">About</a>
   <a href="#classes" onclick="closeMobileMenu()">Classes</a>
   <a href="#orphan" onclick="closeMobileMenu()">Orphan Support</a>
+  <a href="#result" onclick="closeMobileMenu()">Result</a>
   <a href="#" onclick="openAdmission(); closeMobileMenu()">Apply for Admission</a>
   <a href="#support" onclick="closeMobileMenu()">Support Us</a>
   <a href="#location" onclick="closeMobileMenu()">Location</a>
@@ -1994,6 +1996,82 @@ section { position: relative; overflow: hidden; }
     </div>
   </div>
 </section>
+
+<!-- ======================================================
+     EXAMINATION RESULT SECTION
+====================================================== -->
+<section id="result" class="section-pad pattern-bg-alt">
+  <div class="container">
+    <div class="reveal center-text">
+      <div class="section-label">M.M Final Examination 2026</div>
+      <h2 class="section-title">Check Your <span>Result</span></h2>
+      <div class="gold-divider"></div>
+      <p style="max-width:560px;margin:0 auto 30px;color:var(--tm);">Enter your full name exactly as written on your admission form to view and download your marksheet.</p>
+    </div>
+    <div class="reveal" style="max-width:520px;margin:0 auto;">
+      <div class="form-group">
+        <input class="form-input" type="text" id="resultNameInput" placeholder="Enter your full name" onkeydown="if(event.key==='Enter'){checkResult();}">
+      </div>
+      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="checkResult()">Search Result</button>
+      <div id="resultOutput" style="margin-top:24px;"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ======================================================
+   M.M FINAL EXAMINATION 2026 — RESULT DATA
+   ------------------------------------------------------
+   HOW TO ADD A NEW STUDENT:
+   1. Upload the student's marksheet PNG image into the SAME
+      folder/repo as this index.html file (root level — no
+      sub-folder needed).
+   2. Add one line below in the exact same format:
+      { name: "Full Student Name", file: "./filename.PNG" },
+   3. Save and re-upload index.html. That's it — no other change needed.
+====================================================== */
+const studentResults = [
+  { name: "Masud Ahmed Laskar", file: "./Masud Ahmed Laskar.PNG" },
+  { name: "Makbul Ali", file: "./Makbul Ali.PNG" },
+  { name: "Jomir Uddin", file: "./Jomir Uddin.PNG" },
+  { name: "Kamal Uddin", file: "./Kamal Uddin.PNG" },
+  { name: "Shahin Ahmed", file: "./Shahin Ahmed.PNG" },
+  { name: "Najibur Rahman", file: "./Najibur Rahman.PNG" },
+  { name: "Abdul Hannan", file: "./Abdul Hannan.PNG" },
+  { name: "Hussain Ahmed", file: "./Hussain Ahmed.PNG" },
+  { name: "Noor Ahmed", file: "./Noor Ahmed.PNG" },
+];
+
+function normalizeName(str) {
+  return String(str || '').toLowerCase().trim().replace(/\s+/g, ' ');
+}
+
+function checkResult() {
+  const inputEl = document.getElementById('resultNameInput');
+  const outputEl = document.getElementById('resultOutput');
+  const query = normalizeName(inputEl.value);
+
+  if (!query) {
+    outputEl.innerHTML = '<p style="color:var(--gold2);">Please enter your name to search.</p>';
+    return;
+  }
+
+  const matches = studentResults.filter(s => normalizeName(s.name) === query);
+
+  if (matches.length === 0) {
+    outputEl.innerHTML = '<p style="color:var(--tm);">No result found for "' + inputEl.value.trim().replace(/</g,'&lt;') + '". Please check the spelling or contact the office on WhatsApp.</p>';
+    return;
+  }
+
+  outputEl.innerHTML = matches.map(s => `
+    <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px;margin-top:12px;text-align:center;">
+      <p style="color:var(--tw);font-size:1.1rem;margin-bottom:14px;">Result found for <strong>${s.name.replace(/</g,'&lt;')}</strong></p>
+      <a href="${s.file}" target="_blank" class="btn-primary" style="justify-content:center;">Download Marksheet</a>
+    </div>
+  `).join('');
+}
+</script>
+
 <section id="why" class="section-pad pattern-bg">
   <div class="container">
     <div class="reveal">
