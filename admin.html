@@ -27,18 +27,22 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'EB Garamond', Georgia, serif;
-  background: var(--g0);
+  background:
+    radial-gradient(ellipse at top, rgba(201,168,76,0.06), transparent 60%),
+    var(--g0);
   color: var(--tw);
   min-height: 100vh;
   padding: 24px 16px 60px;
 }
-.wrap { max-width: 720px; margin: 0 auto; }
+.wrap { max-width: 780px; margin: 0 auto; }
 h1, h2 {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 700;
 }
+
+/* ---------- Login screen ---------- */
 .center-screen {
-  min-height: 80vh;
+  min-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,15 +50,31 @@ h1, h2 {
 .login-card {
   background: linear-gradient(135deg, rgba(26,58,39,0.7), rgba(12,31,21,0.9));
   border: 1px solid rgba(201,168,76,0.3);
-  border-radius: 20px;
-  padding: 44px 32px;
+  border-radius: 22px;
+  padding: 48px 34px;
   max-width: 380px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  box-shadow: 0 24px 70px rgba(0,0,0,0.55);
+  position: relative;
+  overflow: hidden;
+}
+.login-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--gold2), transparent);
+}
+.login-icon {
+  width: 58px; height: 58px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.35);
+  color: var(--gold2);
 }
 .login-card h1 { font-size: 1.7rem; color: var(--gold2); margin-bottom: 6px; }
-.login-card p { color: var(--tm); font-size: 0.95rem; margin-bottom: 24px; }
+.login-card p { color: var(--tm); font-size: 0.95rem; margin-bottom: 26px; }
 .pw-input {
   width: 100%;
   padding: 14px 16px;
@@ -79,55 +99,148 @@ h1, h2 {
   font-size: 1rem;
   font-family: inherit;
   cursor: pointer;
+  letter-spacing: 0.01em;
 }
 .error-msg { color: #ff8080; font-size: 0.88rem; margin-top: 12px; min-height: 18px; }
 
+/* ---------- Dashboard ---------- */
 .dashboard { display: none; }
 .dash-header {
   text-align: center;
-  margin-bottom: 36px;
+  margin-bottom: 30px;
 }
-.dash-header h1 { font-size: 2rem; color: var(--gold2); margin-bottom: 8px; }
+.dash-header .eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--tl);
+  margin-bottom: 8px;
+}
+.dash-header h1 { font-size: 2.1rem; color: var(--gold2); margin-bottom: 8px; }
 .dash-header p { color: var(--tm); font-size: 0.95rem; }
+
+.stats-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+.stat-box {
+  flex: 1;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+}
+.stat-box .num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  color: var(--gold2);
+  font-weight: 700;
+}
+.stat-box .lbl {
+  font-size: 0.75rem;
+  color: var(--tl);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+.filter-wrap { position: relative; margin-bottom: 30px; }
+.filter-icon {
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  color: var(--tl); pointer-events: none;
+}
+.filter-input {
+  width: 100%;
+  padding: 13px 16px 13px 44px;
+  border-radius: 10px;
+  border: 1px solid rgba(201,168,76,0.25);
+  background: rgba(255,255,255,0.03);
+  color: var(--tw);
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+}
+.filter-input:focus { border-color: var(--gold2); }
+
 .year-block {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
-  padding: 24px;
+  padding: 26px;
   margin-bottom: 26px;
+}
+.year-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(201,168,76,0.18);
 }
 .year-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   color: var(--gold2);
-  margin-bottom: 4px;
 }
-.year-count { color: var(--tl); font-size: 0.85rem; margin-bottom: 18px; }
+.year-count { color: var(--tl); font-size: 0.85rem; }
+
 .student-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 14px;
   padding: 14px 0;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
 .student-row:first-of-type { border-top: none; }
-.student-name { color: var(--tw); font-size: 1.05rem; }
-.dl-btn {
+.student-avatar {
   flex-shrink: 0;
-  padding: 8px 16px;
-  border-radius: 8px;
-  background: rgba(201,168,76,0.14);
-  border: 1px solid rgba(201,168,76,0.4);
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
   color: var(--gold3);
-  text-decoration: none;
+  display: flex; align-items: center; justify-content: center;
   font-size: 0.85rem;
+  font-weight: 600;
+}
+.student-info { flex: 1; min-width: 0; }
+.student-name { color: var(--tw); font-size: 1.04rem; }
+.student-actions {
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+}
+.action-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.82rem;
   font-family: inherit;
   white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid;
+}
+.view-btn {
+  background: transparent;
+  border-color: rgba(255,255,255,0.2);
+  color: var(--tm);
+}
+.dl-btn {
+  background: rgba(201,168,76,0.14);
+  border-color: rgba(201,168,76,0.4);
+  color: var(--gold3);
+}
+.no-match {
+  text-align: center;
+  color: var(--tl);
+  padding: 30px 0;
+  font-size: 0.95rem;
 }
 .logout-btn {
   display: block;
-  margin: 30px auto 0;
+  margin: 10px auto 0;
   padding: 10px 22px;
   border-radius: 8px;
   background: transparent;
@@ -144,6 +257,9 @@ h1, h2 {
 <div class="wrap">
   <div class="center-screen" id="loginScreen">
     <div class="login-card">
+      <div class="login-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
       <h1>Admin Access</h1>
       <p>Enter password to view all examination results</p>
       <input type="password" class="pw-input" id="pwInput" placeholder="Password" onkeydown="if(event.key==='Enter'){tryLogin();}">
@@ -154,9 +270,21 @@ h1, h2 {
 
   <div class="dashboard" id="dashboard">
     <div class="dash-header">
+      <div class="eyebrow">AL JAMEATUS SARIMEATUS SUNNIA</div>
       <h1>Examination Results — Admin</h1>
       <p>All published results, organised year-wise</p>
     </div>
+
+    <div class="stats-row">
+      <div class="stat-box"><div class="num" id="statYears">0</div><div class="lbl">Batches</div></div>
+      <div class="stat-box"><div class="num" id="statStudents">0</div><div class="lbl">Total Students</div></div>
+    </div>
+
+    <div class="filter-wrap">
+      <svg class="filter-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="filter-input" id="filterInput" placeholder="Filter by student name..." oninput="renderYearBlocks()">
+    </div>
+
     <div id="yearBlocks"></div>
     <button class="logout-btn" onclick="logout()">Logout</button>
   </div>
@@ -171,7 +299,7 @@ h1, h2 {
    casual visitors, but is not true secure authentication
    since this is a static site with no server/database.
 ====================================================== */
-const ADMIN_PASSWORD = "@AdminAjss";
+const ADMIN_PASSWORD = "@Jaidul786";
 
 /* ======================================================
    STUDENT RESULT DATA (kept identical to index.html)
@@ -217,29 +345,61 @@ function logout() {
   document.getElementById('pwInput').value = '';
 }
 
+function getInitials(name) {
+  const parts = name.trim().split(/\s+/);
+  const first = parts[0]?.[0] || '';
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : '';
+  return (first + last).toUpperCase();
+}
+
 function showDashboard() {
   document.getElementById('loginScreen').style.display = 'none';
-  const dashboard = document.getElementById('dashboard');
-  dashboard.style.display = 'block';
+  document.getElementById('dashboard').style.display = 'block';
 
+  const years = Object.keys(studentResultsByYear);
+  const totalStudents = years.reduce((sum, y) => sum + studentResultsByYear[y].students.length, 0);
+  document.getElementById('statYears').textContent = years.length;
+  document.getElementById('statStudents').textContent = totalStudents;
+
+  renderYearBlocks();
+}
+
+function renderYearBlocks() {
+  const filter = (document.getElementById('filterInput').value || '').toLowerCase().trim();
   const years = Object.keys(studentResultsByYear).sort((a, b) => b.localeCompare(a));
   const container = document.getElementById('yearBlocks');
+
   container.innerHTML = years.map(y => {
     const batch = studentResultsByYear[y];
-    const rows = batch.students.map(s => `
+    const filteredStudents = filter
+      ? batch.students.filter(s => s.name.toLowerCase().includes(filter))
+      : batch.students;
+
+    if (filteredStudents.length === 0) return '';
+
+    const rows = filteredStudents.map(s => `
       <div class="student-row">
-        <span class="student-name">${s.name.replace(/</g,'&lt;')}</span>
-        <a class="dl-btn" href="${s.file}" download="${s.name.replace(/</g,'&lt;')} Marksheet.jpg" target="_blank">Download</a>
+        <div class="student-avatar">${getInitials(s.name)}</div>
+        <div class="student-info">
+          <div class="student-name">${s.name.replace(/</g,'&lt;')}</div>
+        </div>
+        <div class="student-actions">
+          <a class="action-btn view-btn" href="${s.file}" target="_blank" rel="noopener">View</a>
+          <a class="action-btn dl-btn" href="${s.file}" download="${s.name.replace(/</g,'&lt;')} Marksheet.jpg">Download</a>
+        </div>
       </div>
     `).join('');
+
     return `
       <div class="year-block">
-        <div class="year-title">${batch.label.replace(/</g,'&lt;')}</div>
-        <div class="year-count">${batch.students.length} student${batch.students.length === 1 ? '' : 's'}</div>
+        <div class="year-title-row">
+          <div class="year-title">${batch.label.replace(/</g,'&lt;')}</div>
+          <div class="year-count">${filteredStudents.length} of ${batch.students.length} student${batch.students.length === 1 ? '' : 's'}</div>
+        </div>
         ${rows}
       </div>
     `;
-  }).join('');
+  }).join('') || '<div class="no-match">No students match your search.</div>';
 }
 
 // Stay logged in during the session (until tab/browser is closed)
