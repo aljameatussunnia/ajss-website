@@ -86,7 +86,7 @@
    RESET & BASE
 ====================================================== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; max-width: 100%; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; max-width: 100%; scroll-padding-top: 90px; }
 body {
   font-family: 'Inter', -apple-system, 'Segoe UI', Arial, sans-serif;
   background: var(--g0);
@@ -314,9 +314,17 @@ ul { list-style: none; }
 /* ======================================================
    NAVBAR
 ====================================================== */
-#navbar {
+#tricolor-ribbon {
   position: fixed;
   top: 0; left: 0; right: 0;
+  height: 8px;
+  z-index: 1001;
+  background: linear-gradient(90deg, #FF9933 0%, #FF9933 33.33%, #ffffff 33.33%, #ffffff 66.66%, #138808 66.66%, #138808 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+#navbar {
+  position: fixed;
+  top: 8px; left: 0; right: 0;
   z-index: 1000;
   background: rgba(7,21,16,0.92);
   backdrop-filter: blur(18px) saturate(1.4);
@@ -578,7 +586,15 @@ section { position: relative; overflow: hidden; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(36,80,54,0.4) 0%, transparent 70%),
+    linear-gradient(180deg,
+      rgba(255,153,51,0.32) 0%,
+      rgba(255,153,51,0.14) 14%,
+      rgba(255,255,255,0.05) 28%,
+      transparent 42%,
+      transparent 60%,
+      rgba(19,136,8,0.16) 78%,
+      rgba(19,136,8,0.36) 100%),
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(36,80,54,0.35) 0%, transparent 70%),
     var(--g0);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23d4a94a' stroke-width='0.4' opacity='0.08'%3E%3Cpolygon points='50,5 65,20 85,20 85,40 65,55 50,70 35,55 15,55 15,35 35,20'/%3E%3Cpolygon points='50,15 63,28 78,28 78,43 63,56 50,65 37,56 22,56 22,41 37,28'/%3E%3Ccircle cx='50' cy='37' r='10'/%3E%3Cline x1='50' y1='5' x2='50' y2='70'/%3E%3Cline x1='15' y1='37' x2='85' y2='37'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 100px 100px;
@@ -638,12 +654,16 @@ section { position: relative; overflow: hidden; }
 }
 .hero-title .gold { color: var(--gold2); font-style: italic; }
 .hero-subtitle {
-  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-size: clamp(0.78rem, 2.6vw, 1.3rem);
   color: var(--gold3);
   font-style: italic;
   margin-bottom: 24px;
   animation: fadeInUp 1s 0.25s ease both;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+@media (max-width: 420px) {
+  .hero-subtitle { letter-spacing: 0; }
 }
 .result-notify-chip {
   display: inline-flex;
@@ -861,12 +881,13 @@ section { position: relative; overflow: hidden; }
   margin: 0 auto;
 }
 .mission-ornament {
-  font-size: 2.4rem;
+  font-size: clamp(1.1rem, 5vw, 2.4rem);
   color: var(--gold);
-  opacity: 0.6;
+  opacity: 0.7;
   margin-bottom: 24px;
   display: block;
-  line-height: 1;
+  line-height: 1.3;
+  white-space: nowrap;
   font-family: 'Noto Serif Bengali', 'Traditional Arabic', 'Scheherazade New', serif;
 }
 .mission-text {
@@ -920,6 +941,17 @@ section { position: relative; overflow: hidden; }
   grid-template-columns: 1fr 1fr;
   gap: 14px;
   margin-top: 32px;
+}
+.tricolor-top {
+  position: relative;
+  overflow: hidden;
+}
+.tricolor-top::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #FF9933 0%, #FF9933 33.33%, #ffffff 33.33%, #ffffff 66.66%, #138808 66.66%, #138808 100%);
 }
 .about-feat-item {
   display: flex;
@@ -1917,6 +1949,7 @@ section { position: relative; overflow: hidden; }
 <!-- ======================================================
      NAVBAR
 ====================================================== -->
+<div id="tricolor-ribbon"></div>
 <header id="navbar">
   <div class="nav-inner">
     <div class="nav-logo">
@@ -1990,7 +2023,25 @@ section { position: relative; overflow: hidden; }
   </div>
 
   <div class="hero-content">
-    <p class="hero-welcome">Welcome to AL JAMEATUS SARIMEATUS SUNNIA</p>
+    <p class="hero-welcome">
+      <svg width="16" height="16" viewBox="0 0 100 100" style="vertical-align:-3px;margin-right:6px;" aria-hidden="true">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#0d3b8c" stroke-width="3"/>
+        <circle cx="50" cy="50" r="4" fill="#0d3b8c"/>
+        <g stroke="#0d3b8c" stroke-width="1.6">
+          <line x1="50" y1="4" x2="50" y2="96"/><line x1="4" y1="50" x2="96" y2="50"/>
+          <line x1="13.5" y1="13.5" x2="86.5" y2="86.5"/><line x1="86.5" y1="13.5" x2="13.5" y2="86.5"/>
+          <line x1="50" y1="4" x2="61" y2="20"/><line x1="50" y1="4" x2="39" y2="20"/>
+          <line x1="96" y1="50" x2="80" y2="61"/><line x1="96" y1="50" x2="80" y2="39"/>
+          <line x1="50" y1="96" x2="61" y2="80"/><line x1="50" y1="96" x2="39" y2="80"/>
+          <line x1="4" y1="50" x2="20" y2="61"/><line x1="4" y1="50" x2="20" y2="39"/>
+          <line x1="86.5" y1="13.5" x2="72" y2="24"/><line x1="86.5" y1="13.5" x2="76" y2="28"/>
+          <line x1="86.5" y1="86.5" x2="76" y2="72"/><line x1="86.5" y1="86.5" x2="72" y2="76"/>
+          <line x1="13.5" y1="86.5" x2="24" y2="76"/><line x1="13.5" y1="86.5" x2="28" y2="72"/>
+          <line x1="13.5" y1="13.5" x2="24" y2="24"/><line x1="13.5" y1="13.5" x2="28" y2="28"/>
+        </g>
+      </svg>
+      Welcome to AL JAMEATUS SARIMEATUS SUNNIA
+    </p>
     <div class="hero-tag">✦ Bismillah ir-Rahman ir-Rahim ✦</div>
     <h1 class="hero-title">
       AL JAMEATUS<br>
@@ -2189,19 +2240,19 @@ galleryRender();
           </div>
         </div>
         <div class="about-feature-list">
-          <div class="about-feat-item">
+          <div class="about-feat-item tricolor-top">
             <span class="feat-icon">🕌</span>
             <div class="feat-text"><strong>Islamic Values</strong>Rooted in authentic Sunni principles</div>
           </div>
-          <div class="about-feat-item">
+          <div class="about-feat-item tricolor-top">
             <span class="feat-icon">🏡</span>
             <div class="feat-text"><strong>Residential</strong>24-hour structured campus life</div>
           </div>
-          <div class="about-feat-item">
+          <div class="about-feat-item tricolor-top">
             <span class="feat-icon">📚</span>
             <div class="feat-text"><strong>Academic Focus</strong>Rigorous Islamic curriculum</div>
           </div>
-          <div class="about-feat-item">
+          <div class="about-feat-item tricolor-top">
             <span class="feat-icon">🌙</span>
             <div class="feat-text"><strong>Moral Foundation</strong>Character before career</div>
           </div>
@@ -2244,47 +2295,47 @@ galleryRender();
 
     <div class="collapsible-content" id="classesPanel">
     <div class="classes-grid">
-      <div class="class-card reveal">
+      <div class="class-card reveal tricolor-top">
         <div class="class-arabic">ابتدائي</div>
         <div class="class-name">P.S</div>
         <div class="class-desc">Preparatory Studies</div>
       </div>
-      <div class="class-card reveal">
+      <div class="class-card reveal tricolor-top">
         <div class="class-arabic">أول</div>
         <div class="class-name">1st Year</div>
         <div class="class-desc">Foundation Level</div>
       </div>
-      <div class="class-card reveal">
+      <div class="class-card reveal tricolor-top">
         <div class="class-arabic">ثاني</div>
         <div class="class-name">2nd Year</div>
         <div class="class-desc">Elementary Level</div>
       </div>
-      <div class="class-card reveal">
+      <div class="class-card reveal tricolor-top">
         <div class="class-arabic">ثالث</div>
         <div class="class-name">3rd Year</div>
         <div class="class-desc">Intermediate Level I</div>
       </div>
-      <div class="class-card reveal">
+      <div class="class-card reveal tricolor-top">
         <div class="class-arabic">رابع</div>
         <div class="class-name">4th Year</div>
         <div class="class-desc">Intermediate Level II</div>
       </div>
-      <div class="class-card reveal">
+      <div class="class-card reveal tricolor-top">
         <div class="class-arabic">خامس</div>
         <div class="class-name">5th Year</div>
         <div class="class-desc">Secondary Level I</div>
       </div>
-      <div class="class-card reveal">
+      <div class="class-card reveal tricolor-top">
         <div class="class-arabic">سادس</div>
         <div class="class-name">6th Year</div>
         <div class="class-desc">Secondary Level II</div>
       </div>
-      <div class="class-card reveal">
+      <div class="class-card reveal tricolor-top">
         <div class="class-arabic">سابع</div>
         <div class="class-name">7th Year</div>
         <div class="class-desc">Senior Level</div>
       </div>
-      <div class="class-card reveal">
+      <div class="class-card reveal tricolor-top">
         <div class="class-arabic">عالي</div>
         <div class="class-name">M.M</div>
         <div class="class-desc">Maulana / Advanced</div>
@@ -2614,7 +2665,7 @@ function checkResult() {
       <div class="gold-divider"></div>
     </div>
     <div class="location-grid">
-      <div class="location-info-card reveal">
+      <div class="location-info-card reveal tricolor-top">
         <div class="loc-item">
           <span class="loc-icon">📍</span>
           <div class="loc-detail">
