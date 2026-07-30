@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AL JAMEATUS SARIMEATUS SUNNIA | Islamic Residential Institute, Hailakandi</title>
-<meta name="description" content="AL JAMEATUS SARIMEATUS SUNNIA – An Islamic Value Based Residential Sunni Institute in Hailakandi, Assam. Run by Saha Ayub Educational and Charitable Trust.">
+<title>AL JAMEATUS SARIMEATUS SUNNIA | Islamic Residential Jamia, Hailakandi</title>
+<meta name="description" content="AL JAMEATUS SARIMEATUS SUNNIA – An Islamic Value Based Residential Sunni Jamia in Hailakandi, Assam. Run by Saha Ayub Educational and Charitable Trust.">
 <meta name="keywords" content="Islamic institute Hailakandi, Sunni madrasa Assam, Islamic residential school, orphan education Assam">
 <meta property="og:title" content="AL JAMEATUS SARIMEATUS SUNNIA">
-<meta property="og:description" content="An Islamic Value Based Residential Sunni Institute – Hailakandi, Assam">
+<meta property="og:description" content="An Islamic Value Based Residential Sunni Jamia – Hailakandi, Assam">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -64,21 +64,21 @@
   --g3: #1a4f31;
   --g4: #24623d;
   --g5: #2f7749;
-  --gold:  #d4a94a;
-  --gold2: #e3bf6e;
-  --gold3: #f0d896;
-  --accent:  #d4a94a;
-  --accent2: #e3bf6e;
+  --gold:  #ff9933;
+  --gold2: #ffb35c;
+  --gold3: #ffc98a;
+  --accent:  #ff9933;
+  --accent2: #ffb35c;
   --cream: #faf6ed;
   --white: #ffffff;
   --tw:  rgba(255,255,255,0.92);
   --tm:  rgba(255,255,255,0.65);
   --tl:  rgba(255,255,255,0.4);
   --card-bg: rgba(255,255,255,0.04);
-  --card-border: rgba(212,169,74,0.2);
+  --card-border: rgba(255,153,51,0.2);
   --glass: rgba(13,43,28,0.72);
   --radius: 12px;
-  --shadow-gold: 0 8px 30px rgba(212,169,74,0.12);
+  --shadow-gold: 0 8px 30px rgba(255,153,51,0.12);
   --transition: all 0.3s ease;
 }
 
@@ -323,6 +323,13 @@ ul { list-style: none; }
   border-bottom: 1px solid rgba(255,182,39,0.14);
   transition: var(--transition);
 }
+#navbar::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #FF9933 0%, #FF9933 33.33%, #ffffff 33.33%, #ffffff 66.66%, #138808 66.66%, #138808 100%);
+}
 #navbar.scrolled {
   background: rgba(7,21,16,0.97);
   box-shadow: 0 4px 30px rgba(0,0,0,0.5);
@@ -489,9 +496,10 @@ section { position: relative; overflow: hidden; }
   line-height: 1.8;
 }
 .gold-divider {
-  width: 60px; height: 2px;
-  background: linear-gradient(90deg, var(--gold), transparent);
+  width: 70px; height: 4px;
+  background: linear-gradient(90deg, #FF9933 0%, #FF9933 33%, #ffffff 33%, #ffffff 66%, #138808 66%, #138808 100%);
   margin: 20px 0;
+  border-radius: 2px;
 }
 .center-text { text-align: center; }
 .center-text .gold-divider { margin: 20px auto; }
@@ -513,7 +521,7 @@ section { position: relative; overflow: hidden; }
   border: none;
   transition: var(--transition);
   letter-spacing: 0.04em;
-  box-shadow: 0 4px 16px rgba(212,169,74,0.22);
+  box-shadow: 0 4px 16px rgba(255,153,51,0.22);
 }
 .btn-primary:hover {
   transform: translateY(-2px);
@@ -606,8 +614,8 @@ section { position: relative; overflow: hidden; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(212,169,74,0.12);
-  border: 1px solid rgba(212,169,74,0.3);
+  background: rgba(255,153,51,0.12);
+  border: 1px solid rgba(255,153,51,0.3);
   color: var(--gold2);
   font-size: 0.7rem;
   font-weight: 600;
@@ -858,6 +866,8 @@ section { position: relative; overflow: hidden; }
   opacity: 0.6;
   margin-bottom: 24px;
   display: block;
+  line-height: 1;
+  font-family: 'Noto Serif Bengali', 'Traditional Arabic', 'Scheherazade New', serif;
 }
 .mission-text {
   font-family: 'Noto Serif Bengali', serif;
@@ -1986,7 +1996,7 @@ section { position: relative; overflow: hidden; }
       AL JAMEATUS<br>
       <span class="gold">SARIMEATUS SUNNIA</span>
     </h1>
-    <p class="hero-subtitle">An Islamic Value Based Residential Sunni Institute</p>
+    <p class="hero-subtitle">An Islamic Value Based Residential Sunni Jamia</p>
 
     <a href="#result" class="result-notify-chip">
       <span class="announce-dot"></span>
@@ -2198,17 +2208,17 @@ galleryRender();
         </div>
       </div>
       <div class="reveal">
-        <div class="section-label">Our Institute</div>
+        <div class="section-label">Our Jamia</div>
         <h2 class="section-title">Building <span>Character</span><br>Through Knowledge</h2>
         <div class="gold-divider"></div>
         <p class="section-desc" style="margin-bottom:18px;">
-          AL JAMEATUS SARIMEATUS SUNNIA is a residential Islamic educational institute established under the care of Saha Ayub Educational and Charitable Trust in Hailakandi, Assam. The institute stands as a place where Islamic values are not merely taught — they are lived, practiced and internalized through every aspect of daily campus life.
+          AL JAMEATUS SARIMEATUS SUNNIA is a residential Islamic educational Jamia established under the care of Saha Ayub Educational and Charitable Trust in Hailakandi, Assam. The Jamia stands as a place where Islamic values are not merely taught — they are lived, practiced and internalized through every aspect of daily campus life.
         </p>
         <p class="section-desc" style="margin-bottom:18px;">
           Students receive a comprehensive grounding in Islamic sciences alongside structured personal development, guided by experienced scholars and educators. The residential environment ensures disciplined routines, regular worship, moral reflection and a deep connection with the Sunnah.
         </p>
         <p class="section-desc">
-          Special focus is given to students from orphaned, poor and underprivileged backgrounds — providing them not only education but genuine care, belonging and a pathway toward a dignified future. The institute believes that every child, regardless of circumstance, deserves access to meaningful learning, spiritual nurturing and life guidance.
+          Special focus is given to students from orphaned, poor and underprivileged backgrounds — providing them not only education but genuine care, belonging and a pathway toward a dignified future. The Jamia believes that every child, regardless of circumstance, deserves access to meaningful learning, spiritual nurturing and life guidance.
         </p>
       </div>
     </div>
@@ -2297,7 +2307,7 @@ galleryRender();
       <div class="section-label">Special Programme</div>
       <h2 class="section-title">Orphan Student <span>Support</span></h2>
       <div class="gold-divider"></div>
-      <p class="section-desc">The following provisions are exclusively available for orphan students enrolled at the institute.</p>
+      <p class="section-desc">The following provisions are exclusively available for orphan students enrolled at the Jamia.</p>
     </div>
 
     <button class="accordion-toggle" onclick="toggleCollapse('orphanPanel', this)" data-open-label="View Orphan Support Details" data-close-label="Hide Details">
@@ -2666,7 +2676,7 @@ function checkResult() {
     <div class="contact-grid" style="grid-template-columns:1fr;max-width:600px;margin:0 auto;">
       <div class="reveal">
         <p class="section-desc" style="margin-bottom:32px;">
-          For admissions, inquiries or any information about the institute, reach us through any of the channels below. We welcome all genuine inquiries.
+          For admissions, inquiries or any information about the Jamia, reach us through any of the channels below. We welcome all genuine inquiries.
         </p>
         <div class="loc-item" style="margin-bottom:24px;">
           <span class="loc-icon">📍</span>
@@ -2712,7 +2722,7 @@ function checkResult() {
     <div class="footer-top">
       <div class="footer-brand">
         <h2>AL JAMEATUS SARIMEATUS SUNNIA</h2>
-        <p style="font-style:italic;color:var(--gold);margin-bottom:10px;font-size:0.88rem;">An Islamic Value Based Residential Sunni Institute</p>
+        <p style="font-style:italic;color:var(--gold);margin-bottom:10px;font-size:0.88rem;">An Islamic Value Based Residential Sunni Jamia</p>
         <p>Run by Saha Ayub Educational and Charitable Trust<br>Bypass Road, Vichingcha Part II, Hailakandi, Assam, India</p>
         <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;">
           <a href="https://www.facebook.com/share/1DcfjEVJLz/" target="_blank" class="btn-facebook" style="padding:9px 16px;font-size:0.8rem;">Facebook</a>
@@ -2724,7 +2734,7 @@ function checkResult() {
         <ul>
           <li><a href="#hero">Home</a></li>
           <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#about">About Institute</a></li>
+          <li><a href="#about">About Jamia</a></li>
           <li><a href="#classes">Classes</a></li>
           <li><a href="#orphan">Orphan Support</a></li>
           <li><a href="#" onclick="openAdmission()">Apply for Admission</a></li>
@@ -2820,7 +2830,7 @@ function checkResult() {
           <div class="form-group"><label class="form-label">Previous School</label><input class="form-input" type="text" name="prevSchool" placeholder="Previous institute name"></div>
           <div class="form-group"><label class="form-label">Hostel Required?</label><select class="form-select form-input" name="hostelReq"><option value="Yes">Yes</option><option value="No">No</option></select></div>
         </div>
-        <div style="margin:15px 0;font-size:0.88rem;color:var(--tm);"><label><input type="checkbox" name="terms" required style="margin-right:8px;">I confirm all information provided is accurate and I agree to the institute's terms.</label></div>
+        <div style="margin:15px 0;font-size:0.88rem;color:var(--tm);"><label><input type="checkbox" name="terms" required style="margin-right:8px;">I confirm all information provided is accurate and I agree to the Jamia's terms.</label></div>
         <button type="submit" class="btn-primary" style="width:100%;justify-content:center;" id="admitBtn">Submit Application</button>
       </form>
     </div>
